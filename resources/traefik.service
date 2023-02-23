@@ -1,6 +1,7 @@
 [Unit]
 Description=Traefik service
-After=syslog.target network.target
+Documentation=https://doc.traefik.io/traefik/
+After=network-online.target
 
 [Service]
 Type=notify
