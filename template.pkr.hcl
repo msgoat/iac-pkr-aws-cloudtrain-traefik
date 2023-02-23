@@ -33,13 +33,6 @@ source "amazon-ebs" "sonarqube" {
     volume_size           = 8
     delete_on_termination = true
   }
-  launch_block_device_mappings {
-    device_name           = "/dev/xvdb"
-    encrypted             = true
-    volume_type           = "gp3"
-    volume_size           = 2
-    delete_on_termination = false
-  }
   tags = {
     Base_AMI_Name = "{{ .SourceAMIName }}"
     Department    = "Automotive Academy"
@@ -72,7 +65,6 @@ build {
     }
     scripts = [
       "./scripts/00_init.sh",
-      "./scripts/01_mount_data_volume.sh",
       "./scripts/02_install_traefik.sh",
     ]
   }
@@ -105,5 +97,5 @@ variable ec2_instance_type {
 variable traefik_version {
   description = "Traefik version number"
   type        = string
-  default     = "v2.9.6"
+  default     = "v2.9.8"
 }
