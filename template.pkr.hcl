@@ -79,7 +79,7 @@ variable region_name {
 variable revision {
   description = "Revision number (major.minor.path) of the AMI"
   type        = string
-  default     = "1.0.0"
+  default     = "1.0.1"
 }
 
 variable ami_architecture {

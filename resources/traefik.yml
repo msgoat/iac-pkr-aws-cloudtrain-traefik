@@ -18,6 +18,7 @@ certificatesResolvers:
     acme:
       email: "nico.rogalski@msg-david.de"  # Email address used for registration
       storage: "/data/traefik/acme/acme.json"    # File or key used for certificates storage
+#      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
       tlsChallenge: {}
 
 entryPoints:
