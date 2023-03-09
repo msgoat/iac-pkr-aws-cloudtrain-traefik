@@ -11,7 +11,7 @@ locals {
   ami_name = "CloudTrain-Traefik-${var.revision}-${legacy_isotime("20060102")}-${var.ami_architecture}-gp3"
 }
 
-source "amazon-ebs" "sonarqube" {
+source "amazon-ebs" "traefik" {
   ami_name      = local.ami_name
   instance_type = var.ec2_instance_type
   region        = var.region_name
@@ -47,12 +47,12 @@ source "amazon-ebs" "sonarqube" {
 }
 
 build {
-  sources = ["source.amazon-ebs.sonarqube"]
+  sources = ["source.amazon-ebs.traefik"]
   provisioner "file" {
     sources = [
-      "./resources/traefik.service",
-      "./resources/traefik.yml",
-      "./resources/config.yml"
+      "./resources/traefik.tpl.service",
+      "./resources/traefik.tpl.yml",
+      "./resources/config.tpl.yml"
     ]
     destination = "/tmp/"
   }
@@ -79,7 +79,7 @@ variable region_name {
 variable revision {
   description = "Revision number (major.minor.path) of the AMI"
   type        = string
-  default     = "1.0.1"
+  default     = "1.4.0"
 }
 
 variable ami_architecture {
@@ -91,7 +91,7 @@ variable ami_architecture {
 variable ec2_instance_type {
   description = "EC2 instance type name"
   type        = string
-  default     = "t4g.small"
+  default     = "t4g.micro"
 }
 
 variable traefik_version {
