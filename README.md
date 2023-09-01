@@ -16,3 +16,9 @@ Templates for configuration files are provided in directory `/tmp`:
 
 > Attention: The location of the Traefik data folder `/opt/traefik/data` must be changed if you want to keep the 
 > data on a separate data volume!
+
+Originally developed for msg's `Cloud Training Program` and `Cloud Expert Program`.
+
+## Release Information
+
+A changelog can be found in [changelog.md](changelog.md).

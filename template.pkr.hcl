@@ -79,7 +79,7 @@ variable region_name {
 variable revision {
   description = "Revision number (major.minor.path) of the AMI"
   type        = string
-  default     = "1.4.0"
+  default     = "1.5.0"
 }
 
 variable ami_architecture {
@@ -97,5 +97,5 @@ variable ec2_instance_type {
 variable traefik_version {
   description = "Traefik version number"
   type        = string
-  default     = "v2.9.8"
+  default     = "v2.10.4"
 }
