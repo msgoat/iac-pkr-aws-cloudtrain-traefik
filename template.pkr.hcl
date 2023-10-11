@@ -1,7 +1,7 @@
 packer {
   required_plugins {
     amazon = {
-      version = ">= 1.1.1"
+      version = "~> 1.2"
       source  = "github.com/hashicorp/amazon"
     }
   }
@@ -9,6 +9,7 @@ packer {
 
 locals {
   ami_name = "CloudTrain-Traefik-${var.revision}-${legacy_isotime("20060102")}-${var.ami_architecture}-gp3"
+  fully_qualified_version = "${var.revision}.${var.changelist}.${var.sha1}"
 }
 
 source "amazon-ebs" "traefik" {
@@ -43,6 +44,7 @@ source "amazon-ebs" "traefik" {
     Project       = "CloudTrain"
     Release       = "Latest"
     Name          = local.ami_name
+    Version       = local.fully_qualified_version
   }
 }
 
@@ -79,7 +81,18 @@ variable region_name {
 variable revision {
   description = "Revision number (major.minor.path) of the AMI"
   type        = string
-  default     = "1.5.0"
+}
+
+variable changelist {
+  description = "Branch name"
+  type        = string
+  default     = "local"
+}
+
+variable sha1 {
+  description = "Short commit hash of code base"
+  type        = string
+  default     = "12345678"
 }
 
 variable ami_architecture {
