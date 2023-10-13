@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 ### Fixed
 
+## [2.1.0] - 2023-10-13
+### Changed
+- Replaced personal email address in LetEncrypt ACME config with CXP email address
+- Upgraded Traefik to v2.10.5
+
 ## [2.0.0] - 2023-10-11
 ### Changed
 - Added AWS CodeBuild support
