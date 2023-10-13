@@ -110,5 +110,5 @@ variable ec2_instance_type {
 variable traefik_version {
   description = "Traefik version number"
   type        = string
-  default     = "v2.10.4"
+  default     = "v2.10.5"
 }
