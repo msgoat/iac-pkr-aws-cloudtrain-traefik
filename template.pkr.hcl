@@ -20,7 +20,7 @@ source "amazon-ebs" "traefik" {
     filters = {
       virtualization-type = "hvm"
       architecture        = "${var.ami_architecture}"
-      name                = "amzn2-ami-kernel-5.10-hvm-2.0*"
+      name                = "al2023-ami-minimal-*"
       root-device-type    = "ebs"
     }
     most_recent = true
@@ -38,8 +38,8 @@ source "amazon-ebs" "traefik" {
     Base_AMI_Name = "{{ .SourceAMIName }}"
     Department    = "Automotive Academy"
     Extra         = "<no value>"
-    Maintainer    = "Nico Rogalski (msg)"
-    OS_Version    = "Amazon Linux 2"
+    Maintainer    = "Michael Theis (msg)"
+    OS_Version    = "Amazon Linux 2023"
     Organization  = "msg systems ag"
     Project       = "CloudTrain"
     Release       = "Latest"
@@ -110,5 +110,5 @@ variable ec2_instance_type {
 variable traefik_version {
   description = "Traefik version number"
   type        = string
-  default     = "v2.10.5"
+  default     = "v2.10.7"
 }
