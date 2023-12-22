@@ -104,7 +104,7 @@ variable ami_architecture {
 variable ec2_instance_type {
   description = "EC2 instance type name"
   type        = string
-  default     = "t4g.micro"
+  default     = "t4g.nano"
 }
 
 variable traefik_version {

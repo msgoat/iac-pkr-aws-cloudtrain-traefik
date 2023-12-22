@@ -38,12 +38,18 @@ mv /tmp/traefik.yml $TRAEFIK_CONFIG_DATA/
 envsubst </tmp/config.tpl.yml >/tmp/config.yml
 mv /tmp/config.yml $TRAEFIK_CONFIG_DATA/
 
+echo "Move all configuration templates to a retained folder"
+sudo mkdir -p $TRAEFIK_INSTALL_DIR/tpl
+sudo mv /tmp/config.tpl.yml $TRAEFIK_INSTALL_DIR/tpl/
+sudo mv /tmp/traefik.tpl.service $TRAEFIK_INSTALL_DIR/tpl/
+sudo mv /tmp/traefik.tpl.yml $TRAEFIK_INSTALL_DIR/tpl/
+
 echo "Make runtime user owner of installation directory"
 sudo chown -R traefik:traefik $TRAEFIK_INSTALL_DIR
 sudo chown -R traefik:traefik $TRAEFIK_DATA
 
 echo "Install Traefik as a service"
-envsubst </tmp/traefik.tpl.service >/tmp/traefik.service
+envsubst <$TRAEFIK_INSTALL_DIR/tpl/traefik.tpl.service >/tmp/traefik.service
 sudo mv /tmp/traefik.service /etc/systemd/system/traefik.service
 sudo systemctl daemon-reload
 sudo systemctl enable traefik.service
