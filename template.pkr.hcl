@@ -10,7 +10,7 @@ packer {
 locals {
   default_ami_version = "${var.revision}.${var.build_number}"
   ami_version = "${var.build_number == "" ? var.revision : local.default_ami_version}"
-  ami_name = "CloudTrain-SonarQube-${local.ami_version}-${legacy_isotime("20060102")}-${var.ami_architecture}-gp3"
+  ami_name = "CloudTrain-Traefik-${local.ami_version}-${legacy_isotime("20060102")}-${var.ami_architecture}-gp3"
   fully_qualified_version = "${local.ami_version}.${var.changelist}.${var.sha1}"
 }
 
