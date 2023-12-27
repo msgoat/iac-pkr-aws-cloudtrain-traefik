@@ -8,8 +8,10 @@ packer {
 }
 
 locals {
-  ami_name = "CloudTrain-Traefik-${var.revision}-${legacy_isotime("20060102")}-${var.ami_architecture}-gp3"
-  fully_qualified_version = "${var.revision}.${var.changelist}.${var.sha1}"
+  default_ami_version = "${var.revision}.${var.build_number}"
+  ami_version = "${var.build_number == "" ? var.revision : local.default_ami_version}"
+  ami_name = "CloudTrain-SonarQube-${local.ami_version}-${legacy_isotime("20060102")}-${var.ami_architecture}-gp3"
+  fully_qualified_version = "${local.ami_version}.${var.changelist}.${var.sha1}"
 }
 
 source "amazon-ebs" "traefik" {
@@ -36,15 +38,17 @@ source "amazon-ebs" "traefik" {
   }
   tags = {
     Base_AMI_Name = "{{ .SourceAMIName }}"
-    Department    = "Automotive Academy"
-    Extra         = "<no value>"
-    Maintainer    = "Michael Theis (msg)"
-    OS_Version    = "Amazon Linux 2023"
-    Organization  = "msg systems ag"
-    Project       = "CloudTrain"
     Release       = "Latest"
     Name          = local.ami_name
     Version       = local.fully_qualified_version
+    BuildId       = var.build_id
+    Extra         = "<no value>"
+    OS_Version    = "Amazon Linux 2023"
+    Maintainer    = "Michael Theis (msg)"
+    Organization  = "msg systems ag"
+    BusinessUnit  = "Branche Automotive"
+    Department    = "PG Cloud"
+    Solution      = "CloudTrain"
   }
 }
 
@@ -111,4 +115,16 @@ variable traefik_version {
   description = "Traefik version number"
   type        = string
   default     = "v2.10.7"
+}
+
+variable build_number {
+  description = "Build number of the CodeBuild build which created this AMI"
+  type        = string
+  default     = ""
+}
+
+variable build_id {
+  description = "Unique identifier of the CodeBuild build which created this AMI"
+  type        = string
+  default     = ""
 }
